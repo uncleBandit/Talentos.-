@@ -1,0 +1,14 @@
+{% extends "members/base.html" %}
+
+{% block title %}Applicants for {{ job.title }}{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Applicants for {{ job.title }}</h1>
+<ul>
+    {% for app in applications %}
+    <li>{{ app.applicant.username }} - Applied at {{ app.applied_at }}</li>
+    {% empty %}
+    <li>No applicants yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

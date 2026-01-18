@@ -1,0 +1,80 @@
+{% extends "members/base.html" %}
+
+{% block title %}Talentos | The Future of Work is Here{% endblock %}
+
+{% block content %}
+<div class="relative overflow-hidden pt-16 pb-32">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(250,204,21,0.08)_0%,_transparent_65%)] pointer-events-none"></div>
+
+    <div class="relative z-10 text-center space-y-8 max-w-4xl mx-auto px-6">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-yellow-400 text-xs font-black uppercase tracking-[0.3em] animate-fade-in">
+            System Status: Operational
+        </div>
+        
+        <h1 class="text-6xl md:text-8xl font-black text-white tracking-tighter leading-none">
+            ENGINEERING <br/>
+            <span class="text-yellow-400 italic">CAREERS.</span>
+        </h1>
+        
+        <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            The next-generation terminal for Kenya’s elite developers. <br class="hidden md:block"/> 
+            Connecting <span class="text-white font-bold">top-tier talent</span> with disruptive organizations.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
+            <a href="{% url 'job_list' %}" class="group relative px-10 py-5 bg-yellow-400 text-black font-black uppercase tracking-tighter rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_20px_50px_rgba(250,204,21,0.3)]">
+                <span class="relative z-10">Browse the Grid</span>
+                <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+            </a>
+
+            {% if not user.is_authenticated %}
+            <a href="{% url 'signup' %}" class="px-10 py-5 bg-transparent border border-white/20 text-white font-black uppercase tracking-tighter rounded-2xl hover:bg-white hover:text-black transition-all">
+                Initialize Profile
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto px-6 pb-24">
+    <div class="group p-10 rounded-[3rem] bg-[#0A0A0A] border border-white/5 hover:border-yellow-400/50 transition-all duration-500 relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-100 group-hover:text-yellow-400 transition-opacity">
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        
+        <h2 class="text-3xl font-black text-white mb-4 uppercase tracking-tight">For Employers</h2>
+        <p class="text-slate-500 text-lg mb-8 leading-relaxed">
+            Deploy your roles to a curated network of high-performance developers. Manage the pipeline with industrial precision.
+        </p>
+        <ul class="space-y-3 mb-10">
+            <li class="flex items-center gap-3 text-slate-300 font-bold text-sm uppercase tracking-wide">
+                <span class="text-yellow-400">✓</span> Rapid Deployment
+            </li>
+            <li class="flex items-center gap-3 text-slate-300 font-bold text-sm uppercase tracking-wide">
+                <span class="text-yellow-400">✓</span> Talent Verification
+            </li>
+        </ul>
+        <div class="h-1 w-20 bg-yellow-400 rounded-full group-hover:w-full transition-all duration-700"></div>
+    </div>
+
+    <div class="group p-10 rounded-[3rem] bg-[#0A0A0A] border border-white/5 hover:border-yellow-400/50 transition-all duration-500 relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-100 group-hover:text-yellow-400 transition-opacity">
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+
+        <h2 class="text-3xl font-black text-white mb-4 uppercase tracking-tight">For Seekers</h2>
+        <p class="text-slate-500 text-lg mb-8 leading-relaxed">
+            Access exclusive opportunities that aren't on standard boards. Optimize your career path with Next-Gen tools.
+        </p>
+        <ul class="space-y-3 mb-10">
+            <li class="flex items-center gap-3 text-slate-300 font-bold text-sm uppercase tracking-wide">
+                <span class="text-yellow-400">✓</span> Direct Sync with Founders
+            </li>
+            <li class="flex items-center gap-3 text-slate-300 font-bold text-sm uppercase tracking-wide">
+                <span class="text-yellow-400">✓</span> High-Performance UX
+            </li>
+        </ul>
+        <div class="h-1 w-20 bg-yellow-400 rounded-full group-hover:w-full transition-all duration-700"></div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "members/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Dashboard</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <!-- Organizations -->
+    <div class="bg-white p-4 rounded shadow">
+        <h3 class="font-semibold mb-2">Your Organizations</h3>
+        <ul>
+            {% for membership in user.membership_set.all %}
+            <li>
+                <a href="{% url 'organization_detail' membership.organization.id %}" class="text-blue-600 hover:underline">
+                    {{ membership.organization.name }} ({{ membership.role }})
+                </a>
+            </li>
+            {% empty %}
+            <li>No organizations yet</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Recent Jobs -->
+    <div class="bg-white p-4 rounded shadow">
+        <h3 class="font-semibold mb-2">Recent Jobs</h3>
+        <ul>
+            {% for job in jobs %}
+            <li>
+                <a href="{% url 'job_detail' job.id %}" class="text-blue-600 hover:underline">
+                    {{ job.title }} @ {{ job.organization.name }}
+                </a>
+            </li>
+            {% empty %}
+            <li>No jobs posted yet</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

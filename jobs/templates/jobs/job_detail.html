@@ -1,0 +1,94 @@
+{% extends "members/base.html" %}
+
+{% block title %}{{ job.title }} | Talentos{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-6 py-12">
+    <a href="{% url 'job_list' %}" class="inline-flex items-center gap-2 text-slate-500 hover:text-yellow-400 transition-colors mb-10 group">
+        <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        <span class="text-sm font-bold uppercase tracking-widest">Back to Grid</span>
+    </a>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        
+        <div class="lg:col-span-2 space-y-12">
+            <section>
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="h-16 w-16 rounded-2xl bg-yellow-400 flex items-center justify-center text-black font-black text-3xl shadow-[0_0_30px_rgba(250,204,21,0.3)]">
+                        {{ job.organization.name|slice:":1" }}
+                    </div>
+                    <div>
+                        <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight">
+                            {{ job.title }}<span class="text-yellow-400">_</span>
+                        </h1>
+                        <p class="text-xl text-yellow-400/80 font-medium mt-1">{{ job.organization.name }}</p>
+                    </div>
+                </div>
+
+                <div class="prose prose-invert max-w-none">
+                    <h3 class="text-white text-lg font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <span class="w-8 h-[1px] bg-yellow-400"></span>
+                        Mission Brief
+                    </h3>
+                    <p class="text-slate-400 text-lg leading-relaxed whitespace-pre-line">
+                        {{ job.description }}
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <div class="space-y-6">
+            <div class="bg-[#0A0A0A] border border-white/5 rounded-[2rem] p-8 sticky top-28">
+                <h3 class="text-white font-bold mb-6 tracking-tight">Deployment Details</h3>
+                
+                <div class="space-y-6 mb-8">
+                    <div class="flex items-center gap-4">
+                        <div class="p-3 rounded-xl bg-white/5 text-yellow-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Location</p>
+                            <p class="text-slate-200 font-medium">{{ job.location }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <div class="p-3 rounded-xl bg-white/5 text-yellow-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Model</p>
+                            <p class="text-slate-200 font-medium">{{ job.get_location_type_display }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <div class="p-3 rounded-xl bg-white/5 text-yellow-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Status</p>
+                            <p class="font-bold {% if job.is_active %}text-green-400{% else %}text-red-400{% endif %}">
+                                {% if job.is_active %}ACTIVE SECTOR{% else %}CLOSED{% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {% if can_edit %}
+                    <!-- Employer view -->
+                    <a href="{% url 'job_edit' job.id %}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 mt-4 inline-block">Edit Job</a>
+                {% else %}
+                    <!-- Job seeker view: apply form -->
+                    <a href="{% url 'job_apply' job.id %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4 inline-block">Apply Now</a>
+                {% endif %}
+
+            </div>
+            
+            <p class="text-center text-[10px] text-slate-600 uppercase tracking-widest font-bold">Secure Terminal Encrypted</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

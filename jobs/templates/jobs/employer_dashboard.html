@@ -1,0 +1,37 @@
+{% extends "members/base.html" %}
+
+{% block title %}Employer Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Employer Dashboard</h2>
+
+<a href="{% url 'job_create' %}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 mb-4 inline-block">Post New Job</a>
+
+<table class="min-w-full bg-white shadow rounded">
+    <thead class="bg-gray-200">
+        <tr>
+            <th class="py-2 px-4 text-left">Job Title</th>
+            <th class="py-2 px-4 text-left">Location</th>
+            <th class="py-2 px-4 text-left">Status</th>
+            <th class="py-2 px-4">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+        <tr class="border-b">
+            <td class="py-2 px-4">{{ job.title }}</td>
+            <td class="py-2 px-4">{{ job.location }}</td>
+            <td class="py-2 px-4">{% if job.is_active %}Open{% else %}Closed{% endif %}</td>
+            <td class="py-2 px-4">
+                <a href="{% url 'job_edit' job.id %}" class="text-yellow-600 hover:underline mr-2">Edit</a>
+                <a href="{% url 'job_delete' job.id %}" class="text-red-600 hover:underline">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="py-2 px-4 text-center text-gray-500">No jobs posted yet</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

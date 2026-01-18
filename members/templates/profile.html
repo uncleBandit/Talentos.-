@@ -1,0 +1,23 @@
+{% extends "members/base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Profile: {{ user.username }}</h2>
+
+<ul class="mb-4">
+    <li>Email: {{ user.email }}</li>
+    <li>Username: {{ user.username }}</li>
+    <li>Organizations:
+        <ul>
+            {% for membership in user.membership_set.all %}
+            <li>{{ membership.organization.name }} ({{ membership.role }})</li>
+            {% empty %}
+            <li>None</li>
+            {% endfor %}
+        </ul>
+    </li>
+</ul>
+
+<a href="{% url 'edit_profile' %}" class="text-blue-600 hover:underline">Edit Profile</a>
+{% endblock %}
